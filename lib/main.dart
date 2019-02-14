@@ -24,6 +24,7 @@ class RandomWordsState extends State<RandomWords>
 {
   final _suggestions = <WordPair>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
+  final _saved = new Set<WordPair>();
 
   Widget _buildSuggestions()
   {
@@ -33,9 +34,11 @@ class RandomWordsState extends State<RandomWords>
         {
           if (i.isOdd) return Divider();
           final index = i ~/ 2; //calculates line numbers minus dividers
-          if (index >= _suggestions.length) // if line number (minus dividers) is more than our words generated
+          if (index >= _suggestions
+              .length) // if line number (minus dividers) is more than our words generated
           {
-            _suggestions.addAll(generateWordPairs().take(10)); // add 10 more words
+            _suggestions.addAll(
+                generateWordPairs().take(10)); // add 10 more words
           }
           return _buildRow(_suggestions[index]);
         });
@@ -43,8 +46,11 @@ class RandomWordsState extends State<RandomWords>
 
   Widget _buildRow(WordPair pair)
   {
+    final bool alreadySaved = _saved.contains(pair);
     return ListTile(
       title: Text(pair.asPascalCase, style: _biggerFont,),
+      trailing: new Icon(alreadySaved ? Icons.favorite : Icons.favorite_border,
+        color: alreadySaved ? Colors.red : null,),
     );
   }
 
