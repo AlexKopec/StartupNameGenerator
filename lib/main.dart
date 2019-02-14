@@ -29,13 +29,13 @@ class RandomWordsState extends State<RandomWords>
   {
     return ListView.builder(
         padding: const EdgeInsets.all(16.0),
-        itemBuilder: (context, i)
+        itemBuilder: (context, i) //i is line number
         {
           if (i.isOdd) return Divider();
-          final index = i ~/ 2;
-          if (index >= _suggestions.length)
+          final index = i ~/ 2; //calculates line numbers minus dividers
+          if (index >= _suggestions.length) // if line number (minus dividers) is more than our words generated
           {
-            _suggestions.addAll(generateWordPairs().take(10));
+            _suggestions.addAll(generateWordPairs().take(10)); // add 10 more words
           }
           return _buildRow(_suggestions[index]);
         });
