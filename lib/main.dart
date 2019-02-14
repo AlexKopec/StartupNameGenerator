@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 
-void main() => runApp(MyApp());
+void main()
+=> runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget
+{
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: RandomWords()
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
+        home: RandomWords()
     );
   }
 }
@@ -22,18 +25,20 @@ class RandomWordsState extends State<RandomWords>
   final _suggestions = <WordPair>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
-  Widget _buildSuggestions() {
+  Widget _buildSuggestions()
+  {
     return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      itemBuilder: (context, i){
-        if (i.isOdd) return Divider();
-        final index = i ~/ 2;
-        if (index >= _suggestions.length)
+        padding: const EdgeInsets.all(16.0),
+        itemBuilder: (context, i)
+        {
+          if (i.isOdd) return Divider();
+          final index = i ~/ 2;
+          if (index >= _suggestions.length)
           {
             _suggestions.addAll(generateWordPairs().take(10));
           }
           return _buildRow(_suggestions[index]);
-      });
+        });
   }
 
   Widget _buildRow(WordPair pair)
@@ -44,7 +49,8 @@ class RandomWordsState extends State<RandomWords>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return Scaffold(
       appBar: AppBar(
         title: Text('Startup Name Generator'),
@@ -57,5 +63,6 @@ class RandomWordsState extends State<RandomWords>
 class RandomWords extends StatefulWidget
 {
   @override
-  RandomWordsState createState()=> new RandomWordsState();
+  RandomWordsState createState()
+  => new RandomWordsState();
 }
